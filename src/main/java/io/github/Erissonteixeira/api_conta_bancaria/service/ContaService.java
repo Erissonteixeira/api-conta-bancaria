@@ -1,0 +1,8 @@
+package io.github.Erissonteixeira.api_conta_bancaria.service;
+
+import io.github.Erissonteixeira.api_conta_bancaria.dto.ContaRequestDto;
+import io.github.Erissonteixeira.api_conta_bancaria.dto.ContaResponseDto;
+
+public interface ContaService{
+    ContaResponseDto criarConta(ContaRequestDto dto);
+}
