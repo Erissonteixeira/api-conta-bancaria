@@ -37,4 +37,19 @@ public class ContaServiceImpl implements ContaService{
                 conta.getSaldo()
         );
     }
+    @Override
+    public ContaResponseDto atualizar(Long id, ContaRequestDto dto){
+        Conta conta = contaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Conta não encontrada"));
+        conta.setTitular(dto.titular());
+        conta.setSaldo(dto.saldoInicial());
+
+        Conta contaAtulizada = contaRepository.save(conta);
+        return new ContaResponseDto(
+                contaAtulizada.getId(),
+                contaAtulizada.getTitular(),
+                contaAtulizada.getSaldo()
+        );
+
+    }
 }
