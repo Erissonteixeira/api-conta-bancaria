@@ -164,5 +164,19 @@ public class ContaServiceImplTest{
 
         org.mockito.Mockito.verify(contaRepository).delete(contaMock);
     }
+    @Test
+    void deveLancarExcecaoQuandoDeletarContaInexistenta(){
+        Long id = 1l;
+
+        when(contaRepository.findById(id)).thenReturn(java.util.Optional.empty());
+
+        try {
+            contaService.deletar(id);
+        } catch (RuntimeException e){
+            assertEquals("Conta não encontrada", e.getMessage());
+            return;
+        }
+        throw new AssertionError("Era esperada uma RuntimeException, mas nada foi lançado");
+    }
 }
 
