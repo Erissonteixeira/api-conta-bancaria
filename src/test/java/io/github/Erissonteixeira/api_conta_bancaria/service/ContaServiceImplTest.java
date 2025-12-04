@@ -144,5 +144,25 @@ public class ContaServiceImplTest{
 
         assertEquals(0, resposta.size());
     }
+    @Test
+    void deveDeletarContaComSucesso(){
+        Long id = 1l;
+
+        Conta contaMock = new Conta("Erisson", 1000.0);
+
+        try {
+            var field = Conta.class.getDeclaredField("id");
+            field.setAccessible(true);
+            field.set(contaMock, id);
+        } catch (Exception e){
+            throw new RuntimeException(e);
+        }
+
+        when(contaRepository.findById(id)).thenReturn(java.util.Optional.of(contaMock));
+
+        contaService.deletar(id);
+
+        org.mockito.Mockito.verify(contaRepository).delete(contaMock);
+    }
 }
 
