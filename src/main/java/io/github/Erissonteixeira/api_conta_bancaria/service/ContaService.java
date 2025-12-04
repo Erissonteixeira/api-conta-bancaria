@@ -10,6 +10,7 @@ public interface ContaService{
     ContaResponseDto buscarPorId(Long id);
     ContaResponseDto atualizar(Long id, ContaRequestDto dto);
     List<ContaResponseDto> listar();
+    void deletar(Long id);
 
 
 }
