@@ -72,5 +72,28 @@ public class ContaServiceImplTest{
         }
         throw new AssertionError("Era esperada uma RuntimeException, mas nada foi lançado");
     }
+    @Test
+    void deveAtualizarContaComSucesso(){
+        Long id = 1l;
+        ContaRequestDto dto = new ContaRequestDto("Erisson Atualizado", 2000.0);
+
+        Conta contaMock = new Conta("Erisson", 1000.0);
+        try {
+            java.lang.reflect.Field field = Conta.class.getDeclaredField("id");
+            field.setAccessible(true);
+            field.set(contaMock, id);
+        } catch (Exception e){
+            throw new RuntimeException(e);
+        }
+        when(contaRepository.findById(id)).thenReturn(java.util.Optional.of(contaMock));
+
+        when(contaRepository.save(contaMock)).thenReturn(contaMock);
+
+        ContaResponseDto resposta = contaService.atualizar(id, dto);
+
+        assertEquals(id, resposta.id());
+        assertEquals("Erisson Atualizado", resposta.titular());
+        assertEquals(2000.0, resposta.saldo());
+    }
 }
 
