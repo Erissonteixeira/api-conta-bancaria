@@ -36,5 +36,27 @@ public class ContaServiceImplTest{
         assertEquals("Erisson", resposta.titular());
         assertEquals(1000.0,resposta.saldo());
     }
+    @Test
+    void deveBuscarContaPorIdComSucesso(){
+        Long id = 1l;
+        Conta contaMock = new Conta("Erisson", 1000.0);
+        contaMock.setSaldo(1000.0);
+
+        java.lang.reflect.Field field = null;
+        try{
+            field = Conta.class.getDeclaredField("id");
+            field.setAccessible(true);
+            field.set(contaMock, id);
+        } catch (Exception e){
+            throw new RuntimeException(e);
+        }
+        when(contaRepository.findById(id)).thenReturn(java.util.Optional.of(contaMock));
+
+        ContaResponseDto resposta = contaService.buscarPorId(id);
+
+        assertEquals(id, resposta.id());
+        assertEquals("Erisson", resposta.titular());
+        assertEquals(1000.0, resposta.saldo());
+    }
 }
 
