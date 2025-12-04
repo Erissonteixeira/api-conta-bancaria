@@ -5,6 +5,9 @@ import io.github.Erissonteixeira.api_conta_bancaria.dto.ContaResponseDto;
 
 public interface ContaService{
     ContaResponseDto criarConta(ContaRequestDto dto);
-
     ContaResponseDto buscarPorId(Long id);
+    ContaResponseDto atualizar(Long id, ContaRequestDto dto);
+
+
 }
+
