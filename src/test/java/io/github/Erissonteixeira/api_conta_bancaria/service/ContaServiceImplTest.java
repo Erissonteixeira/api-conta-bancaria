@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 public class ContaServiceImplTest{
@@ -29,7 +30,7 @@ public class ContaServiceImplTest{
         Conta contaMock = new Conta("Erisson", 1000.0);
         contaMock.setSaldo(1000.0);
 
-        when(contaRepository.save(contaMock)).thenReturn(contaMock);
+        when(contaRepository.save(any(Conta.class))).thenReturn(contaMock);
 
         ContaResponseDto resposta = contaService.criarConta(dto);
 
