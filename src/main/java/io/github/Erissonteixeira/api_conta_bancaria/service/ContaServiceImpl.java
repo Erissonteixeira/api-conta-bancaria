@@ -6,6 +6,8 @@ import io.github.Erissonteixeira.api_conta_bancaria.model.Conta;
 import io.github.Erissonteixeira.api_conta_bancaria.repository.ContaRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ContaServiceImpl implements ContaService{
     private final ContaRepository contaRepository;
@@ -51,5 +53,16 @@ public class ContaServiceImpl implements ContaService{
                 contaAtulizada.getSaldo()
         );
 
+    }
+    @Override
+    public List<ContaResponseDto> listar(){
+        return contaRepository.findAll()
+                .stream()
+                .map(conta -> new ContaResponseDto(
+                        conta.getId(),
+                        conta.getTitular(),
+                        conta.getSaldo()
+                ))
+                .toList();
     }
 }
