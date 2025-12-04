@@ -165,7 +165,7 @@ public class ContaServiceImplTest{
         org.mockito.Mockito.verify(contaRepository).delete(contaMock);
     }
     @Test
-    void deveLancarExcecaoQuandoDeletarContaInexistenta(){
+    void deveLancarExcecaoQuandoDeletarContaInexistente(){
         Long id = 1l;
 
         when(contaRepository.findById(id)).thenReturn(java.util.Optional.empty());
