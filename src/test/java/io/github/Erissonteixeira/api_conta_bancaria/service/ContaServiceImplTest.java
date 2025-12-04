@@ -58,5 +58,19 @@ public class ContaServiceImplTest{
         assertEquals("Erisson", resposta.titular());
         assertEquals(1000.0, resposta.saldo());
     }
+    @Test
+    void deveLancarExcecaoQuandoContaNaoExistir(){
+        Long id = 1l;
+
+        when(contaRepository.findById(id)).thenReturn(java.util.Optional.empty());
+
+        try {
+            contaService.buscarPorId(id);
+        } catch (RuntimeException e){
+            assertEquals("Conta não encontrada", e.getMessage());
+            return;
+        }
+        throw new AssertionError("Era esperada uma RuntimeException, mas nada foi lançado");
+    }
 }
 
