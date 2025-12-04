@@ -65,4 +65,10 @@ public class ContaServiceImpl implements ContaService{
                 ))
                 .toList();
     }
+    @Override
+    public void deletar(Long id){
+        Conta conta = contaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Conta não encontrada"));
+        contaRepository.delete(conta);
+    }
 }
