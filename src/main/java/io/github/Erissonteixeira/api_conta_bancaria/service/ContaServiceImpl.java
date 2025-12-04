@@ -27,4 +27,14 @@ public class ContaServiceImpl implements ContaService{
                 contaSalva.getSaldo()
         );
     }
+    @Override
+    public ContaResponseDto buscarPorId(Long id){
+        Conta conta = contaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Conta não encontrada"));
+        return new ContaResponseDto(
+                conta.getId(),
+                conta.getTitular(),
+                conta.getSaldo()
+        );
+    }
 }
