@@ -95,5 +95,20 @@ public class ContaServiceImplTest{
         assertEquals("Erisson Atualizado", resposta.titular());
         assertEquals(2000.0, resposta.saldo());
     }
+    @Test
+    void deveLancarExcecaoQuandoAtualizarContaInexistente(){
+        Long id = 1l;
+        ContaRequestDto dto = new ContaRequestDto("Erisson", 1000.0);
+
+        when(contaRepository.findById(id)).thenReturn(java.util.Optional.empty());
+        try {
+            contaService.atualizar(id, dto);
+        } catch (RuntimeException e) {
+            assertEquals("Conta não encontrada", e.getMessage());
+
+            return;
+        }
+        throw new AssertionError("Era esperada uma RuntimeException, mas nada foi lançado");
+    }
 }
 
