@@ -136,5 +136,13 @@ public class ContaServiceImplTest{
         assertEquals("Erisson", resposta.get(0).titular());
         assertEquals("Teixeira", resposta.get(1).titular());
     }
+    @Test
+    void deveRetornarListaVaziaQuandoNaoExistiremContas(){
+        when(contaRepository.findAll()).thenReturn(List.of());
+
+        List<ContaResponseDto> resposta = contaService.listar();
+
+        assertEquals(0, resposta.size());
+    }
 }
 
