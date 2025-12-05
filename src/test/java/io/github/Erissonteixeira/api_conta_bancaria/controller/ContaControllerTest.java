@@ -82,4 +82,13 @@ public class ContaControllerTest {
                 .andExpect(jsonPath("$.titular").value("Erisson Atualizado"))
                 .andExpect(jsonPath("$.saldo").value(2000.0));
     }
+    @Test
+    void deveDeletarContaComSucesso() throws Exception{
+        Long id = 1l;
+
+        mockMvc.perform(delete("/api/v1/contas/{id}", id))
+                .andExpect(status().isOk());
+
+        org.mockito.Mockito.verify(contaService).deletar(id);
+    }
 }
