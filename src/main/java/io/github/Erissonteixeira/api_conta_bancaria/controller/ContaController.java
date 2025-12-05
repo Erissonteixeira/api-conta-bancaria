@@ -28,5 +28,8 @@
         public ContaResponseDto atualizar(@PathVariable Long id, @RequestBody ContaRequestDto dto){
             return contaService.atualizar(id, dto);
         }
-
+        @DeleteMapping("/{id}")
+        public void deletar(@PathVariable Long id){
+            contaService.deletar(id);
+        }
     }
