@@ -15,8 +15,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -66,5 +65,21 @@ public class ContaControllerTest {
                 .andExpect(jsonPath("$.id").value(id))
                 .andExpect(jsonPath("$.titular").value("Erisson"))
                 .andExpect(jsonPath("$.saldo").value(1000.0));
+    }
+    @Test
+    void deveAtualizarContaComSucesso() throws Exception{
+        Long id = 1l;
+        ContaRequestDto dto = new ContaRequestDto("Erisson Atualizado", 2000.0);
+        ContaResponseDto respostaMock = new ContaResponseDto(id, "Erisson Atualizado", 2000.0);
+
+        when(contaService.atualizar(any(Long.class), any(ContaRequestDto.class))).thenReturn(respostaMock);
+
+        mockMvc.perform(put("/api/v1/contas/{id}", id)
+                .contentType(MediaType.APPLICATION_JSON)
+                .contentType(objectMapper.writeValueAsString(dto)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(id))
+                .andExpect(jsonPath("$.titular").value("Erisson Atualizado"))
+                .andExpect(jsonPath("$.saldo").value(2000.0));
     }
 }
