@@ -19,4 +19,8 @@ public class ContaController {
     public ContaResponseDto criar(@RequestBody ContaRequestDto dto){
         return contaService.criarConta(dto);
     }
+    @GetMapping("/{id}")
+    public ContaResponseDto buscarPorId(@PathVariable Long id){
+        return contaService.buscarPorId(id);
+    }
 }
