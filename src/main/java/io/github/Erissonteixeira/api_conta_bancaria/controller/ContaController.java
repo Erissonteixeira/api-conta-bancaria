@@ -24,8 +24,9 @@
         public ContaResponseDto buscarPorId(@PathVariable Long id) {
             return contaService.buscarPorId(id);
         }
-        @PutMapping
+        @PutMapping("/{id}")
         public ContaResponseDto atualizar(@PathVariable Long id, @RequestBody ContaRequestDto dto){
             return contaService.atualizar(id, dto);
         }
+
     }
