@@ -23,4 +23,3 @@ public class ContaController {
     public ContaResponseDto buscarPorId(@PathVariable Long id){
         return contaService.buscarPorId(id);
     }
-}
