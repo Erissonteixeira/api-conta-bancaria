@@ -76,7 +76,7 @@ public class ContaControllerTest {
 
         mockMvc.perform(put("/api/v1/contas/{id}", id)
                 .contentType(MediaType.APPLICATION_JSON)
-                .contentType(objectMapper.writeValueAsString(dto)))
+                .content(objectMapper.writeValueAsString(dto)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(id))
                 .andExpect(jsonPath("$.titular").value("Erisson Atualizado"))
