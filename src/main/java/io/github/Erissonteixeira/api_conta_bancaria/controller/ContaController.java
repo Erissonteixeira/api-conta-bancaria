@@ -1,25 +1,31 @@
-package io.github.Erissonteixeira.api_conta_bancaria.controller;
+    package io.github.Erissonteixeira.api_conta_bancaria.controller;
 
-import io.github.Erissonteixeira.api_conta_bancaria.dto.ContaRequestDto;
-import io.github.Erissonteixeira.api_conta_bancaria.dto.ContaResponseDto;
-import io.github.Erissonteixeira.api_conta_bancaria.service.ContaService;
-import org.springframework.web.bind.annotation.*;
+    import io.github.Erissonteixeira.api_conta_bancaria.dto.ContaRequestDto;
+    import io.github.Erissonteixeira.api_conta_bancaria.dto.ContaResponseDto;
+    import io.github.Erissonteixeira.api_conta_bancaria.service.ContaService;
+    import org.springframework.web.bind.annotation.*;
 
-@RestController
-@RequestMapping("api/v1/contas")
-public class ContaController {
+    @RestController
+    @RequestMapping("api/v1/contas")
+    public class ContaController {
 
-    private final ContaService contaService;
+        private final ContaService contaService;
 
-    public ContaController(ContaService contaService) {
-        this.contaService = contaService;
-    }
+        public ContaController(ContaService contaService) {
+            this.contaService = contaService;
+        }
 
-    @PostMapping
-    public ContaResponseDto criar(@RequestBody ContaRequestDto dto){
-        return contaService.criarConta(dto);
-    }
-    @GetMapping("/{id}")
-    public ContaResponseDto buscarPorId(@PathVariable Long id){
-        return contaService.buscarPorId(id);
+        @PostMapping
+        public ContaResponseDto criar(@RequestBody ContaRequestDto dto) {
+            return contaService.criarConta(dto);
+        }
+
+        @GetMapping("/{id}")
+        public ContaResponseDto buscarPorId(@PathVariable Long id) {
+            return contaService.buscarPorId(id);
+        }
+        @PutMapping
+        public ContaResponseDto atualizar(@PathVariable Long id, @RequestBody ContaRequestDto dto){
+            return contaService.atualizar(id, dto);
+        }
     }
